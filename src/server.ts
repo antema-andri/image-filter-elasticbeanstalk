@@ -36,13 +36,15 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // after to filtering and deleting it
   // try {{host}}/filteredimage?image_url={{}}
   app.get( "/filteredimage/", async ( req, res ) => {
-	//
+    // check if param query is not validate
     if(!req.query || !req.query.image_url){
       return res.status(400).send(`image undefined`);
     }
     
+    // filter image from url
     const imgPromise = filterImageFromURL(req.query.image_url);
     imgPromise.then((imgLocalySaved) => {
+      // delete image after diplay it			
       res.status(200).sendFile(imgLocalySaved, () => {
         deleteLocalFiles([imgLocalySaved]);
       })
