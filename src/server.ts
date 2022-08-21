@@ -50,7 +50,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       })
     })
     .catch(() => { 
-      return res.status(500).send(`error while creating image`); 
+      return res.status(422).send(`error while creating image`); 
     });
 
   } );
